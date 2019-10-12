@@ -50,3 +50,18 @@ class JoinRoomsAndStudents():
             i['students'] = student_dict.get(str(i['id']))
 
         return rooms_list
+
+
+# load files from .json
+students = OpenFile.read_file('students', 'json')
+rooms = OpenFile.read_file('rooms', 'json')
+
+# append students to rooms_list
+student_dict = JoinRoomsAndStudents.make_student_dict(students)
+rooms_list = JoinRoomsAndStudents.join_students_to_rooms(rooms, student_dict)
+
+# write rooms_list to file .xml
+WriteFile.write_to_file('full_rooms', 'xml', rooms_list)
+
+# or write rooms_list to file .json
+WriteFile.write_to_file('full_rooms', 'json', rooms_list)
