@@ -52,16 +52,21 @@ class JoiningData():
         return rooms_list
 
 
-# load files from .json
-students = ReadingData.read_file('students', 'json')
-rooms = ReadingData.read_file('rooms', 'json')
+rooms_path = input('Enter file name containing rooms data')
+rooms_format = input('Enter file format containing rooms data')
+students_path = input('Enter file name containing students data')
+students_format = input('Enter file format containing students data')
+joined_path = input("Enter new file name with joined data")
+joined_format = input("Enter new file format with joined data")
+
+
+# read files
+students = ReadingData.read_file(students_path, students_format)
+rooms = ReadingData.read_file(rooms_path, rooms_format)
 
 # append students to rooms_list
 student_dict = JoiningData.make_student_dict(students)
 rooms_list = JoiningData.join_students_to_rooms(rooms, student_dict)
 
-# write rooms_list to file .xml
-WritingData.write_to_file('full_rooms', 'xml', rooms_list)
-
-# or write rooms_list to file .json
-WritingData.write_to_file('full_rooms', 'json', rooms_list)
+# write rooms_list to file
+WritingData.write_to_file(joined_path, joined_format, rooms_list)
